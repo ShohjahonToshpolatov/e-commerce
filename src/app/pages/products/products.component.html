@@ -33,3 +33,13 @@
     </div>
     }
 </section>
+
+@if (toastMessage()) {
+<div class="toast">
+    <span>✓</span>
+    <div>
+        <strong>Added to cart</strong>
+        <p>{{ toastMessage() }}</p>
+    </div>
+</div>
+}

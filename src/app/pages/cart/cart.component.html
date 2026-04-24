@@ -1,3 +1,57 @@
-<section class="container">
+<section class="container cart">
     <h1>Your Cart</h1>
+
+    @if (cartService.items().length === 0) {
+    <div class="empty card">
+        <h3>Cart is empty</h3>
+        <p>Add some products to get started.</p>
+    </div>
+    } @else {
+
+    <div class="cart-grid">
+        <div class="items">
+            @for (item of cartService.items(); track item.product.id) {
+            <div class="item card">
+                <img [src]="item.product.image" />
+
+                <div class="info">
+                    <h3>{{ item.product.name }}</h3>
+                    <p>{{ item.product.brand }}</p>
+
+                    <div class="actions">
+                        <button (click)="cartService.decrease(item.product.id)">-</button>
+                        <span>{{ item.quantity }}</span>
+                        <button (click)="cartService.increase(item.product.id)">+</button>
+                    </div>
+                </div>
+
+                <div class="price">
+                    {{ item.product.price * item.quantity | currency }}
+                </div>
+
+                <button class="remove" (click)="cartService.remove(item.product.id)">
+                    ✕
+                </button>
+            </div>
+            }
+        </div>
+
+        <div class="summary card">
+            <h3>Order summary</h3>
+
+            <div class="row">
+                <span>Subtotal</span>
+                <strong>{{ cartService.subtotal() | currency }}</strong>
+            </div>
+
+            <button class="btn btn-primary">
+                Proceed to checkout
+            </button>
+
+            <button class="btn btn-ghost" (click)="cartService.clear()">
+                Clear cart
+            </button>
+        </div>
+    </div>
+    }
 </section>

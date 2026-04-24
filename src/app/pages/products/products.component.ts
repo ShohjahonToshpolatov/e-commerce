@@ -1,4 +1,4 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { Product } from '../../core/models/product.model';
@@ -13,12 +13,13 @@ import { ProductCardComponent } from '../../shared/components/product-card/produ
   styleUrl: './products.component.scss'
 })
 export class ProductsComponent {
-  private readonly productService = new ProductService();
-  private readonly cartService = new CartService();
+  private readonly productService = inject(ProductService);
+  private readonly cartService = inject(CartService);
 
   readonly search = signal('');
   readonly selectedCategory = signal('All');
   readonly sortBy = signal('featured');
+  readonly toastMessage = signal('');
 
   readonly products = signal(this.productService.getProducts());
   readonly categories = this.productService.getCategories();
@@ -34,28 +35,24 @@ export class ProductsComponent {
         product.brand.toLowerCase().includes(searchValue) ||
         product.category.toLowerCase().includes(searchValue);
 
-      const matchesCategory =
-        category === 'All' || product.category === category;
+      const matchesCategory = category === 'All' || product.category === category;
 
       return matchesSearch && matchesCategory;
     });
 
-    if (sort === 'low') {
-      result = [...result].sort((a, b) => a.price - b.price);
-    }
-
-    if (sort === 'high') {
-      result = [...result].sort((a, b) => b.price - a.price);
-    }
-
-    if (sort === 'rating') {
-      result = [...result].sort((a, b) => b.rating - a.rating);
-    }
+    if (sort === 'low') result = [...result].sort((a, b) => a.price - b.price);
+    if (sort === 'high') result = [...result].sort((a, b) => b.price - a.price);
+    if (sort === 'rating') result = [...result].sort((a, b) => b.rating - a.rating);
 
     return result;
   });
 
   addToCart(product: Product): void {
     this.cartService.addToCart(product);
+    this.toastMessage.set(`${product.name} added to cart`);
+
+    setTimeout(() => {
+      this.toastMessage.set('');
+    }, 2200);
   }
 }
