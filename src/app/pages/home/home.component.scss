@@ -1,0 +1,53 @@
+.hero {
+    padding: 80px 0;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.hero h1 {
+    font-size: 44px;
+    line-height: 1.2;
+    margin-bottom: 16px;
+}
+
+.hero p {
+    color: var(--muted);
+    font-size: 16px;
+    margin-bottom: 24px;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.hero-card {
+    padding: 24px;
+    text-align: center;
+}
+
+.features {
+    margin-top: 60px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.feature {
+    padding: 20px;
+}
+
+@media (max-width: 768px) {
+    .hero-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .features {
+        grid-template-columns: 1fr;
+    }
+}
