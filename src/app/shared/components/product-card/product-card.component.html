@@ -1,0 +1,38 @@
+<article class="product-card card">
+    <div class="image-wrap">
+        <img [src]="product.image" [alt]="product.name" />
+
+        @if (product.badge) {
+        <span class="badge">{{ product.badge }}</span>
+        }
+
+        @if (!product.inStock) {
+        <span class="stock">Out of stock</span>
+        }
+    </div>
+
+    <div class="content">
+        <div class="meta">
+            <span>{{ product.brand }}</span>
+            <span>⭐ {{ product.rating }}</span>
+        </div>
+
+        <h3>{{ product.name }}</h3>
+
+        <p>{{ product.category }} · {{ product.reviews }} reviews</p>
+
+        <div class="bottom">
+            <div>
+                <strong>{{ product.price | currency }}</strong>
+
+                @if (product.oldPrice) {
+                <small>{{ product.oldPrice | currency }}</small>
+                }
+            </div>
+
+            <button class="btn btn-primary" [disabled]="!product.inStock">
+                Add
+            </button>
+        </div>
+    </div>
+</article>
