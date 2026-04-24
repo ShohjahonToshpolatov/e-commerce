@@ -1,3 +1,97 @@
-<section class="container">
-    <h1>Checkout</h1>
+<section class="container checkout-page">
+    <div class="checkout-head">
+        <span class="eyebrow">Secure checkout</span>
+        <h1>Complete your order</h1>
+        <p>Enter your details and review your order before placing it.</p>
+    </div>
+
+    @if (isSubmitted()) {
+    <div class="success card">
+        <div class="check">✓</div>
+        <h2>Order placed successfully</h2>
+        <p>Your order request has been created. Backend API integration is ready for the next step.</p>
+        <a routerLink="/products" class="btn btn-primary">Continue shopping</a>
+    </div>
+    } @else if (cartService.items().length === 0) {
+    <div class="empty card">
+        <h2>Your cart is empty</h2>
+        <p>Add products before checkout.</p>
+        <a routerLink="/products" class="btn btn-primary">Browse products</a>
+    </div>
+    } @else {
+    <div class="checkout-grid">
+        <form class="checkout-form card" #checkoutForm="ngForm" (ngSubmit)="placeOrder()">
+            <h3>Customer details</h3>
+
+            <label>
+                Full name
+                <input name="fullName" required [(ngModel)]="customer.fullName" placeholder="Your full name" />
+            </label>
+
+            <label>
+                Email
+                <input name="email" type="email" required [(ngModel)]="customer.email" placeholder="you@example.com" />
+            </label>
+
+            <label>
+                Phone
+                <input name="phone" required [(ngModel)]="customer.phone" placeholder="+998 90 123 45 67" />
+            </label>
+
+            <label>
+                Address
+                <input name="address" required [(ngModel)]="customer.address" placeholder="Street, house, apartment" />
+            </label>
+
+            <label>
+                City
+                <input name="city" [(ngModel)]="customer.city" placeholder="Tashkent" />
+            </label>
+
+            <label>
+                Payment method
+                <select name="payment" [(ngModel)]="customer.payment">
+                    <option value="card">Card payment</option>
+                    <option value="cash">Cash on delivery</option>
+                </select>
+            </label>
+
+            <button class="btn btn-primary submit-btn" type="submit" [disabled]="checkoutForm.invalid">
+                Place order
+            </button>
+        </form>
+
+        <aside class="order-summary card">
+            <h3>Order summary</h3>
+
+            <div class="summary-items">
+                @for (item of cartService.items(); track item.product.id) {
+                <div class="summary-item">
+                    <img [src]="item.product.image" [alt]="item.product.name" />
+
+                    <div>
+                        <strong>{{ item.product.name }}</strong>
+                        <span>{{ item.quantity }} × {{ item.product.price | currency }}</span>
+                    </div>
+                </div>
+                }
+            </div>
+
+            <div class="row">
+                <span>Subtotal</span>
+                <strong>{{ cartService.subtotal() | currency }}</strong>
+            </div>
+
+            <div class="row">
+                <span>Delivery</span>
+                <strong>Free</strong>
+            </div>
+
+            <div class="total">
+                <span>Total</span>
+                <strong>{{ total() | currency }}</strong>
+            </div>
+        </aside>
+    </div>
+    }
 </section>
