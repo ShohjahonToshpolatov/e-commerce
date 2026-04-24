@@ -1,0 +1,46 @@
+<header class="site-header">
+    <div class="container nav">
+        <a routerLink="/" class="brand">
+            <span class="brand-mark">E</span>
+            <span>EliteCart</span>
+        </a>
+
+        <nav class="nav-links">
+            <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+            <a routerLink="/products" routerLinkActive="active">Products</a>
+            <a routerLink="/cart" routerLinkActive="active">Cart</a>
+            <a routerLink="/checkout" routerLinkActive="active">Checkout</a>
+        </nav>
+
+        <a routerLink="/cart" class="cart-pill">
+            🛒 Cart
+            <span>0</span>
+        </a>
+    </div>
+</header>
+
+<main>
+    <router-outlet />
+</main>
+
+<footer class="site-footer">
+    <div class="container footer-grid">
+        <div>
+            <h3>EliteCart</h3>
+            <p>Modern e-commerce platform built with Angular. Fast, clean, and backend-ready.</p>
+        </div>
+
+        <div>
+            <h4>Explore</h4>
+            <a routerLink="/">Home</a>
+            <a routerLink="/products">Products</a>
+            <a routerLink="/cart">Cart</a>
+        </div>
+
+        <div>
+            <h4>Contact</h4>
+            <p>Tashkent, Uzbekistan</p>
+            <p>support&#64;elitecart.dev</p>
+        </div>
+    </div>
+</footer>

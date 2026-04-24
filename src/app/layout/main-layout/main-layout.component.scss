@@ -1,0 +1,128 @@
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(248, 250, 252, 0.76);
+    border-bottom: 1px solid var(--line);
+    backdrop-filter: blur(18px);
+}
+
+.nav {
+    min-height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+    font-size: 21px;
+}
+
+.brand-mark {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border-radius: 14px;
+    color: #fff;
+    background: linear-gradient(135deg, var(--brand), #7c3aed);
+    box-shadow: 0 16px 30px rgba(37, 99, 235, 0.25);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--surface);
+}
+
+.nav-links a {
+    padding: 10px 15px;
+    border-radius: 999px;
+    color: var(--muted);
+    font-weight: 700;
+    transition: 0.2s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--text);
+    background: var(--surface-soft);
+}
+
+.cart-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 15px;
+    border-radius: 999px;
+    background: var(--text);
+    color: #fff;
+    font-weight: 800;
+    box-shadow: var(--shadow);
+}
+
+.cart-pill span {
+    min-width: 22px;
+    height: 22px;
+    display: grid;
+    place-items: center;
+    border-radius: 999px;
+    background: #fff;
+    color: var(--text);
+    font-size: 12px;
+}
+
+main {
+    min-height: calc(100vh - 280px);
+}
+
+.site-footer {
+    margin-top: 80px;
+    padding: 48px 0;
+    background: #0f172a;
+    color: #fff;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 32px;
+}
+
+.site-footer p,
+.site-footer a {
+    display: block;
+    color: #cbd5e1;
+    line-height: 1.8;
+}
+
+.site-footer h3,
+.site-footer h4 {
+    margin-top: 0;
+}
+
+@media (max-width: 760px) {
+    .nav {
+        flex-wrap: wrap;
+        padding: 14px 0;
+    }
+
+    .nav-links {
+        width: 100%;
+        justify-content: space-between;
+        overflow-x: auto;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+}
