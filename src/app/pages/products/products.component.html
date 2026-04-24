@@ -1,3 +1,35 @@
-<section class="container">
-    <h1>Products</h1>
+<section class="products-hero">
+    <div class="container">
+        <span class="eyebrow">Catalog</span>
+        <h1>Shop premium products</h1>
+        <p>Search, filter and discover products with a clean shopping experience.</p>
+    </div>
+</section>
+
+<section class="container toolbar card">
+    <input type="text" placeholder="Search products..." [ngModel]="search()" (ngModelChange)="search.set($event)" />
+
+    <select [ngModel]="selectedCategory()" (ngModelChange)="selectedCategory.set($event)">
+        @for (category of categories; track category) {
+        <option [value]="category">{{ category }}</option>
+        }
+    </select>
+
+    <select [ngModel]="sortBy()" (ngModelChange)="sortBy.set($event)">
+        <option value="featured">Featured</option>
+        <option value="low">Price: low to high</option>
+        <option value="high">Price: high to low</option>
+        <option value="rating">Top rated</option>
+    </select>
+</section>
+
+<section class="container products-grid">
+    @for (product of filteredProducts(); track product.id) {
+    <app-product-card [product]="product" />
+    } @empty {
+    <div class="empty card">
+        <h3>No products found</h3>
+        <p>Try changing search or category filter.</p>
+    </div>
+    }
 </section>
