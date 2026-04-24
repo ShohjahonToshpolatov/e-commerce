@@ -1,7 +1,10 @@
 import { Component, computed, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ProductCardComponent } from '../../shared/components/product-card/product-card.component';
+
+import { Product } from '../../core/models/product.model';
 import { ProductService } from '../../core/services/product.service';
+import { CartService } from '../../core/services/cart.service';
+import { ProductCardComponent } from '../../shared/components/product-card/product-card.component';
 
 @Component({
   selector: 'app-products',
@@ -11,6 +14,7 @@ import { ProductService } from '../../core/services/product.service';
 })
 export class ProductsComponent {
   private readonly productService = new ProductService();
+  private readonly cartService = new CartService();
 
   readonly search = signal('');
   readonly selectedCategory = signal('All');
@@ -50,4 +54,8 @@ export class ProductsComponent {
 
     return result;
   });
+
+  addToCart(product: Product): void {
+    this.cartService.addToCart(product);
+  }
 }

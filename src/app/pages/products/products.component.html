@@ -25,7 +25,7 @@
 
 <section class="container products-grid">
     @for (product of filteredProducts(); track product.id) {
-    <app-product-card [product]="product" />
+    <app-product-card [product]="product" (addToCart)="addToCart($event)" />
     } @empty {
     <div class="empty card">
         <h3>No products found</h3>
