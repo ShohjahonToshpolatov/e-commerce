@@ -14,7 +14,7 @@
 
         <a routerLink="/cart" class="cart-pill">
             🛒 Cart
-            <span>0</span>
+            <span>{{ cartService.totalItems() }}</span>
         </a>
     </div>
 </header>

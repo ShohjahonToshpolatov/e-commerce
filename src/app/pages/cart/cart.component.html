@@ -1,57 +1,81 @@
-<section class="container cart">
-    <h1>Your Cart</h1>
+<section class="container cart-page">
+    <div class="cart-head">
+        <div>
+            <span class="eyebrow">Shopping bag</span>
+            <h1>Your Cart</h1>
+            <p>Review your selected products before checkout.</p>
+        </div>
+
+        <a routerLink="/products" class="btn btn-ghost">Continue shopping</a>
+    </div>
 
     @if (cartService.items().length === 0) {
     <div class="empty card">
-        <h3>Cart is empty</h3>
-        <p>Add some products to get started.</p>
+        <h2>Your cart is empty</h2>
+        <p>Start adding products from the catalog.</p>
+        <a routerLink="/products" class="btn btn-primary">Browse products</a>
     </div>
     } @else {
-
     <div class="cart-grid">
-        <div class="items">
+        <div class="cart-items">
             @for (item of cartService.items(); track item.product.id) {
-            <div class="item card">
-                <img [src]="item.product.image" />
+            <article class="cart-item card">
+                <img [src]="item.product.image" [alt]="item.product.name" />
 
-                <div class="info">
+                <div class="item-info">
+                    <span>{{ item.product.brand }}</span>
                     <h3>{{ item.product.name }}</h3>
-                    <p>{{ item.product.brand }}</p>
+                    <p>{{ item.product.category }}</p>
 
-                    <div class="actions">
-                        <button (click)="cartService.decrease(item.product.id)">-</button>
-                        <span>{{ item.quantity }}</span>
-                        <button (click)="cartService.increase(item.product.id)">+</button>
-                    </div>
+                    <button class="remove" (click)="cartService.remove(item.product.id)">
+                        Remove
+                    </button>
                 </div>
 
-                <div class="price">
+                <div class="qty">
+                    <button (click)="cartService.decrease(item.product.id)">−</button>
+                    <strong>{{ item.quantity }}</strong>
+                    <button (click)="cartService.increase(item.product.id)">+</button>
+                </div>
+
+                <strong class="price">
                     {{ item.product.price * item.quantity | currency }}
-                </div>
-
-                <button class="remove" (click)="cartService.remove(item.product.id)">
-                    ✕
-                </button>
-            </div>
+                </strong>
+            </article>
             }
         </div>
 
-        <div class="summary card">
+        <aside class="summary card">
             <h3>Order summary</h3>
+
+            <div class="row">
+                <span>Items</span>
+                <strong>{{ cartService.totalItems() }}</strong>
+            </div>
 
             <div class="row">
                 <span>Subtotal</span>
                 <strong>{{ cartService.subtotal() | currency }}</strong>
             </div>
 
-            <button class="btn btn-primary">
-                Proceed to checkout
-            </button>
+            <div class="row muted">
+                <span>Delivery</span>
+                <strong>Free</strong>
+            </div>
 
-            <button class="btn btn-ghost" (click)="cartService.clear()">
+            <div class="total">
+                <span>Total</span>
+                <strong>{{ cartService.subtotal() | currency }}</strong>
+            </div>
+
+            <a routerLink="/checkout" class="btn btn-primary checkout-btn">
+                Checkout
+            </a>
+
+            <button class="btn btn-ghost clear-btn" (click)="cartService.clear()">
                 Clear cart
             </button>
-        </div>
+        </aside>
     </div>
     }
 </section>
