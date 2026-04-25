@@ -9,7 +9,7 @@
     <div class="success card">
         <div class="check">✓</div>
         <h2>Order placed successfully</h2>
-        <p>Your order request has been created. Backend API integration is ready for the next step.</p>
+        <p>Your order request has been created. Order ID: <strong>{{ orderId() }}</strong></p>
         <a routerLink="/products" class="btn btn-primary">Continue shopping</a>
     </div>
     } @else if (cartService.items().length === 0) {
@@ -56,8 +56,8 @@
                 </select>
             </label>
 
-            <button class="btn btn-primary submit-btn" type="submit" [disabled]="checkoutForm.invalid">
-                Place order
+            <button class="btn btn-primary submit-btn" type="submit" [disabled]="checkoutForm.invalid || isLoading()">
+                {{ isLoading() ? 'Placing order...' : 'Place order' }}
             </button>
         </form>
 

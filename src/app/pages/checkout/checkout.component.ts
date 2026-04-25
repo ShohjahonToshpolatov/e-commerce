@@ -2,7 +2,9 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+
 import { CartService } from '../../core/services/cart.service';
+import { OrderService } from '../../core/services/order.service';
 
 @Component({
   selector: 'app-checkout',
@@ -12,9 +14,13 @@ import { CartService } from '../../core/services/cart.service';
 })
 export class CheckoutComponent {
   readonly cartService = inject(CartService);
-  readonly isSubmitted = signal(false);
+  private readonly orderService = inject(OrderService);
 
-  readonly deliveryFee = computed(() => this.cartService.subtotal() > 0 ? 0 : 0);
+  readonly isSubmitted = signal(false);
+  readonly isLoading = signal(false);
+  readonly orderId = signal('');
+
+  readonly deliveryFee = computed(() => 0);
   readonly total = computed(() => this.cartService.subtotal() + this.deliveryFee());
 
   customer = {
@@ -37,7 +43,23 @@ export class CheckoutComponent {
       return;
     }
 
-    this.isSubmitted.set(true);
-    this.cartService.clear();
+    this.isLoading.set(true);
+
+    this.orderService.createOrder({
+      customer: this.customer,
+      items: this.cartService.items(),
+      subtotal: this.cartService.subtotal(),
+      total: this.total()
+    }).subscribe({
+      next: response => {
+        this.orderId.set(response.orderId);
+        this.isSubmitted.set(true);
+        this.cartService.clear();
+        this.isLoading.set(false);
+      },
+      error: () => {
+        this.isLoading.set(false);
+      }
+    });
   }
 }
