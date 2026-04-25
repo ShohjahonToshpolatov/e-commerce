@@ -17,7 +17,9 @@
             <span>⭐ {{ product.rating }}</span>
         </div>
 
-        <h3>{{ product.name }}</h3>
+        <a [routerLink]="['/products', product.id]">
+            <h3>{{ product.name }}</h3>
+        </a>
 
         <p>{{ product.category }} · {{ product.reviews }} reviews</p>
 
