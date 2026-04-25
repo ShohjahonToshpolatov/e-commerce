@@ -88,4 +88,8 @@ export class ProductService {
     getCategories(): string[] {
         return ['All', ...new Set(this.products.map(product => product.category))];
     }
+
+    getProductById(id: number): Product | undefined {
+        return this.products.find(product => product.id === id);
+    }
 }
