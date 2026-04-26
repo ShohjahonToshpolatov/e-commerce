@@ -55,6 +55,6 @@ export class ProductsComponent {
 
     setTimeout(() => {
       this.toastMessage.set('');
-    }, 2200);
+    }, 3000);
   }
 }
