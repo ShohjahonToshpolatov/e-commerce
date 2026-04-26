@@ -5,10 +5,11 @@ import { Product } from '../../core/models/product.model';
 import { ProductService } from '../../core/services/product.service';
 import { CartService } from '../../core/services/cart.service';
 import { ProductCardComponent } from '../../shared/components/product-card/product-card.component';
+import { ProductSkeletonComponent } from '../../shared/components/product-skeleton/product-skeleton.component';
 
 @Component({
   selector: 'app-products',
-  imports: [FormsModule, ProductCardComponent],
+  imports: [FormsModule, ProductCardComponent, ProductSkeletonComponent],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })
@@ -23,6 +24,7 @@ export class ProductsComponent {
 
   readonly products = signal(this.productService.getProducts());
   readonly categories = this.productService.getCategories();
+  readonly isLoading = signal(false);
 
   readonly filteredProducts = computed(() => {
     const searchValue = this.search().toLowerCase().trim();

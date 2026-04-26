@@ -24,13 +24,18 @@
 </section>
 
 <section class="container products-grid">
+    @if (isLoading()) {
+    @for (i of [1,2,3,4,5,6]; track i) {
+    <app-product-skeleton />
+    }
+    } @else {
     @for (product of filteredProducts(); track product.id) {
     <app-product-card [product]="product" (addToCart)="addToCart($event)" />
     } @empty {
     <div class="empty card">
         <h3>No products found</h3>
-        <p>Try changing search or category filter.</p>
     </div>
+    }
     }
 </section>
 
