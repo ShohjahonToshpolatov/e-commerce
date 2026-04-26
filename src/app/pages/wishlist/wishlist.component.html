@@ -1,1 +1,17 @@
-<p>wishlist works!</p>
+<section class="container wishlist">
+    <h1>Your Wishlist</h1>
+    <p>Products you saved for later.</p>
+
+    @if (wishlistService.items().length === 0) {
+    <div class="empty card">
+        <h2>No saved products yet</h2>
+        <a routerLink="/products" class="btn btn-primary">Browse products</a>
+    </div>
+    } @else {
+    <div class="grid">
+        @for (product of wishlistService.items(); track product.id) {
+        <app-product-card [product]="product" (addToCart)="addToCart($event)" />
+        }
+    </div>
+    }
+</section>

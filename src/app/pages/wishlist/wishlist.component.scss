@@ -1,0 +1,31 @@
+.wishlist {
+    padding: 54px 0;
+}
+
+h1 {
+    font-size: 42px;
+    margin-bottom: 8px;
+}
+
+p {
+    color: var(--muted);
+}
+
+.grid {
+    margin-top: 26px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.empty {
+    margin-top: 24px;
+    padding: 40px;
+    text-align: center;
+}
+
+@media (max-width: 900px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}

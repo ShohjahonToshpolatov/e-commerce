@@ -92,4 +92,5 @@ export class ProductService {
     getProductById(id: number): Product | undefined {
         return this.products.find(product => product.id === id);
     }
+
 }

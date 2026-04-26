@@ -9,6 +9,9 @@
         @if (!product.inStock) {
         <span class="stock">Out of stock</span>
         }
+        <button class="wish" (click)="wishlistService.toggle(product)">
+            {{ wishlistService.isInWishlist(product.id) ? '♥' : '♡' }}
+        </button>
     </div>
 
     <div class="content">

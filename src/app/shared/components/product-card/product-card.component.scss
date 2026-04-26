@@ -88,3 +88,17 @@ button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
 }
+
+.wish {
+    position: absolute;
+    right: 14px;
+    bottom: 14px;
+    width: 42px;
+    height: 42px;
+    border: 0;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+    font-size: 22px;
+    box-shadow: var(--shadow);
+}

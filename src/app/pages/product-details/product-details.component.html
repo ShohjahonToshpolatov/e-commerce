@@ -1,1 +1,43 @@
-<p>product-details works!</p>
+<section class="container details">
+    @if (product(); as product) {
+    <a routerLink="/products" class="back">← Back to products</a>
+
+    <div class="details-grid">
+        <div class="image card">
+            <img [src]="product.image" [alt]="product.name" />
+        </div>
+
+        <div class="info">
+            <span class="brand">{{ product.brand }}</span>
+            <h1>{{ product.name }}</h1>
+            <p class="meta">⭐ {{ product.rating }} · {{ product.reviews }} reviews · {{ product.category }}</p>
+
+            <div class="price">
+                <strong>{{ product.price | currency }}</strong>
+                @if (product.oldPrice) {
+                <small>{{ product.oldPrice | currency }}</small>
+                }
+            </div>
+            <p class="desc">
+                Premium quality product designed for modern lifestyle. Smooth shopping experience,
+                fast delivery and clean product presentation.
+            </p>
+
+            <div class="qty">
+                <button (click)="decrease()">−</button>
+                <strong>{{ quantity() }}</strong>
+                <button (click)="increase()">+</button>
+            </div>
+
+            <button class="btn btn-primary" [disabled]="!product.inStock" (click)="addToCart()">
+                Add to cart
+            </button>
+        </div>
+    </div>
+    } @else {
+    <div class="card not-found">
+        <h2>Product not found</h2>
+        <a routerLink="/products" class="btn btn-primary">Back to products</a>
+    </div>
+    }
+</section>
