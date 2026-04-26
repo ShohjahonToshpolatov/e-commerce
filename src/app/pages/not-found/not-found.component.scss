@@ -1,0 +1,25 @@
+.not-found {
+    min-height: 70vh;
+    display: grid;
+    place-items: center;
+    padding: 40px 16px;
+}
+
+.box {
+    padding: 44px;
+    text-align: center;
+}
+
+span {
+    color: var(--brand);
+    font-size: 72px;
+    font-weight: 900;
+}
+
+h1 {
+    font-size: 38px;
+}
+
+p {
+    color: var(--muted);
+}
