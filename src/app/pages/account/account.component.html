@@ -1,1 +1,16 @@
-<p>account works!</p>
+<section class="container account">
+    @if (authService.user(); as user) {
+    <div class="card panel">
+        <h1>My account</h1>
+        <p><strong>Name:</strong> {{ user.fullName }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <button class="btn btn-ghost" (click)="authService.logout()">Logout</button>
+    </div>
+    } @else {
+    <div class="card panel">
+        <h1>You are not logged in</h1>
+        <p>Login or create account to continue.</p>
+        <a routerLink="/login" class="btn btn-primary">Login</a>
+    </div>
+    }
+</section>

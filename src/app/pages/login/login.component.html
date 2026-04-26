@@ -1,1 +1,13 @@
-<p>login works!</p>
+<section class="auth-page">
+    <form class="auth-card card" (ngSubmit)="login()">
+        <h1>Welcome back</h1>
+        <p>Login to continue shopping.</p>
+
+        <input name="email" type="email" required [(ngModel)]="email" placeholder="Email" />
+        <input name="password" type="password" required [(ngModel)]="password" placeholder="Password" />
+
+        <button class="btn btn-primary">Login</button>
+
+        <span>New here? <a routerLink="/register">Create account</a></span>
+    </form>
+</section>

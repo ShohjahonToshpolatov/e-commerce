@@ -1,1 +1,14 @@
-<p>register works!</p>
+<section class="auth-page">
+    <form class="auth-card card" (ngSubmit)="register()">
+        <h1>Create account</h1>
+        <p>Join EliteCart and save your shopping flow.</p>
+
+        <input name="fullName" required [(ngModel)]="fullName" placeholder="Full name" />
+        <input name="email" type="email" required [(ngModel)]="email" placeholder="Email" />
+        <input name="password" type="password" required [(ngModel)]="password" placeholder="Password" />
+
+        <button class="btn btn-primary">Register</button>
+
+        <span>Already have account? <a routerLink="/login">Login</a></span>
+    </form>
+</section>
